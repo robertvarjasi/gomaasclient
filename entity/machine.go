@@ -31,7 +31,7 @@ type Machine struct {
 	VolumeGroups                 []VolumeGroup       `json:"volume_groups,omitempty"`
 	InterfaceSet                 []NetworkInterface  `json:"interface_set,omitempty"`
 	BCaches                      []string            `json:"bcaches,omitempty"`
-	RAIDs                        []string            `json:"raids,omitempty"`
+	RAIDs                        []Raid              `json:"raids,omitempty"`
 	SpecialFilesystems           []string            `json:"special_filesystems,omitempty"`
 	ServiceSet                   []MachineServiceSet `json:"service_set,omitempty"`
 	PhysicalBlockDeviceSet       []BlockDevice       `json:"physicalblockdevice_set,omitempty"`
@@ -158,6 +158,7 @@ type MachineAllocateParams struct {
 type MachineDeployParams struct {
 	UserData       string `url:"user_data,omitempty"`
 	DistroSeries   string `url:"distro_series,omitempty"`
+	OSystem        string `url:"osystem,omitempty"`
 	HWEKernel      string `url:"hwe_kernel,omitempty"`
 	AgentName      string `url:"agent_name,omitempty"`
 	Comment        string `url:"comment,omitempty"`
