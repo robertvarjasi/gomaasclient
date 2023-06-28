@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"net/url"
+	"strings"
 
 	"github.com/google/go-querystring/query"
 	"github.com/maas/gomaasclient/entity"
@@ -96,9 +97,21 @@ func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err
 }
 
 func (m *Machine) GetPowerParameters(systemID string) (params map[string]string, err error) {
-	params = map[string]string{}
+	params_ := map[string]interface{}{}
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, &params)
+		err_ := json.Unmarshal(data, &params_)
+		params = make(map[string]string, len(params_))
+		for k,v := range params_.([]interface{}) {
+			if k == "workaround_flags" {
+				for k_,v_ := range v.([]interface{}) {
+					wfs[k_] = v.(string)
+				}
+				params[k] = strings.Join(wfs, ",")
+			} else {
+				params[k] = v.(string)
+			}
+		}
+		return err_
 	})
 	return
 }
