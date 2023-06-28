@@ -101,7 +101,7 @@ func (m *Machine) GetPowerParameters(systemID string) (params map[string]string,
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
 		err_ := json.Unmarshal(data, &params_)
 		params = make(map[string]string, len(params_))
-		for k,v := range params_.([]interface{}) {
+		for k,v := range params_ {
 			if k == "workaround_flags" {
 				wfs := make([]string, len(v.([]interface{})))
 				for k_,v_ := range v.([]interface{}) {
