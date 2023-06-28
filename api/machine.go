@@ -12,5 +12,5 @@ type Machine interface {
 	Deploy(systemID string, params *entity.MachineDeployParams) (*entity.Machine, error)
 	Lock(systemID string, comment string) (*entity.Machine, error)
 	ClearDefaultGateways(systemID string) (*entity.Machine, error)
-	GetPowerParameters(systemID string) (map[string]string, error)
+	GetPowerParameters(systemID string) (map[string]interface{}, error)
 }
