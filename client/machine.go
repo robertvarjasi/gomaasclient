@@ -105,7 +105,7 @@ func (m *Machine) GetPowerParameters(systemID string) (params map[string]string,
 			if k == "workaround_flags" {
 				wfs := make([]string, len(v.([]interface{})))
 				for k_,v_ := range v.([]interface{}) {
-					wfs[k_] = v.(string)
+					wfs[k_] = v_.(string)
 				}
 				params[k] = strings.Join(wfs, ",")
 			} else {
