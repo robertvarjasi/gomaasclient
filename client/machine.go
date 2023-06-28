@@ -95,7 +95,7 @@ func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err
 	return
 }
 
-func (m *Machine) GetPowerParameters(systemID string) (params map[string]string, err error) {
+func (m *Machine) GetPowerParameters(systemID string) (params map[string]interface{}, err error) {
 	params = map[string]interface{}{}
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
