@@ -32,7 +32,14 @@ func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[s
 		return
 	}
 	for k, v := range powerParams {
-		qsp.Add(k, v)
+		if k == "power_parameters_workaround_flags" {
+			wfs := strings.Split(v, ",")
+			for _, v_ := range wfs {
+				qsp.Add(k, v_)
+			}
+		} else {
+			qsp.Add(k, v)
+		}
 	}
 	ma = new(entity.Machine)
 	err = m.client().Post("", qsp, func(data []byte) error {
