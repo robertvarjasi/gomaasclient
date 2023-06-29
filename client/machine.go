@@ -34,7 +34,7 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, p
 		return
 	}
 	for k, v := range powerParams {
-		if k == "workaround_flags" {
+		if k == "power_parameters_workaround_flags" {
 			wfs := strings.Split(v, ",")
 			for _, v_ := range wfs {
 				qsp.Add(k + "[]", v_)
