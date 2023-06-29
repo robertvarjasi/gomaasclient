@@ -34,7 +34,12 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, p
 		return
 	}
 	for k, v := range powerParams {
-		qsp.Add(k, v)
+		if k == "workaround_flags" {
+			wfs := strings.Split(v, ",")
+			qsp.Add(k, wfs)
+		} else {
+			qsp.Add(k, v)
+		}
 	}
 	ma = new(entity.Machine)
 	err = m.client(systemID).Put(qsp, func(data []byte) error {
