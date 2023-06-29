@@ -37,7 +37,7 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, p
 		if k == "workaround_flags" {
 			wfs := strings.Split(v, ",")
 			for _, v_ := range wfs {
-				qsp.Add(k, v_)
+				qsp.Add(k + "[]", v_)
 			}
 		} else {
 			qsp.Add(k, v)
